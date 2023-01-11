@@ -17,7 +17,7 @@ spec:
     kind: GitRepository
     name: podinfo
   targetNamespace: marcin-fluxcd-playground-dev
-patches:
+  patches:
     - patch: |-
         apiVersion: autoscaling/v2beta2
         kind: HorizontalPodAutoscaler
