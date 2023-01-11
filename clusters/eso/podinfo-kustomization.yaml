@@ -17,15 +17,15 @@ spec:
     kind: GitRepository
     name: podinfo
   targetNamespace: marcin-fluxcd-playground-dev
-# patches:
-#     - patch: |-
-#         apiVersion: autoscaling/v2beta2
-#         kind: HorizontalPodAutoscaler
-#         metadata:
-#           name: podinfo
-#         spec:
-#           minReplicas: 1
-#           maxReplicas: 2
-#       target:
-#         name: podinfo
-#         kind: HorizontalPodAutoscaler
+patches:
+    - patch: |-
+        apiVersion: autoscaling/v2beta2
+        kind: HorizontalPodAutoscaler
+        metadata:
+          name: podinfo
+        spec:
+          minReplicas: 1
+          maxReplicas: 2
+      target:
+        name: podinfo
+        kind: HorizontalPodAutoscaler
