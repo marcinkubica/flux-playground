@@ -18,7 +18,7 @@ jobs:
       - name: get istio controlplane version
         id: get-istio-version
         run: |
-          ISTIO_VERSION=$(yq eval '.data.version' ./clusters/my-cluster/istio-version.yaml)
+          ISTIO_VERSION=$(yq eval '.data.version' ./clusters/eso/istio-version.yaml)
           echo "ISTIO_VERSION=$ISTIO_VERSION" >> $GITHUB_ENV
       - name: get istioctl uri
         id: get-istioctl
@@ -41,7 +41,7 @@ jobs:
 
           URI=$(cat istio/system/istio.yaml | yq e '. | select(.kind == "HelmRepository" and .metadata.name =="istio") | .spec.url' -)
           cat istio/system/istio.yaml | yq e '. | select(.kind == "HelmRelease" and .metadata.name =="istiod") | .spec.values' - > values.yaml
-          VERSION=$(cat clusters/my-cluster/istio-version.yaml | yq e '.data.version' -)
+          VERSION=$(cat clusters/eso/istio-version.yaml | yq e '.data.version' -)
           helm repo add istio $URI
           helm template -n istio-system -f values.yaml --version $VERSION istiod istio/istiod | yq e '.| select(.kind == "ConfigMap" and .metadata.name == "istio-sidecar-injector") | .data.config' - > injector.yaml
           helm template -n istio-system -f values.yaml --version $VERSION istiod istio/istiod | yq e '.| select(.kind == "ConfigMap" and .metadata.name == "istio") | .data.mesh' - > mesh.yaml

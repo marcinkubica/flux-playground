@@ -19,7 +19,7 @@ jobs:
       - name: Get Istio current version
         id: get-istio-version
         run: |
-          ISTIO_VERSION=$(yq eval '.data.version' ./clusters/my-cluster/istio-version.yaml)
+          ISTIO_VERSION=$(yq eval '.data.version' ./clusters/eso/istio-version.yaml)
           echo "ISTIO_VERSION=$ISTIO_VERSION" >> $GITHUB_ENV
       - name: Get Istio CTL URL
         id: get-istioctl

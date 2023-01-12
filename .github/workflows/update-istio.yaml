@@ -30,7 +30,7 @@ jobs:
           ISTIO_VERSION: ${{ steps.get-istioctl.outputs.version }}
         run: |
           echo "Found Istio version ${ISTIO_VERSION}"
-          yq eval '.data.version=env(ISTIO_VERSION)' -i ./clusters/my-cluster/istio-version.yaml
+          yq eval '.data.version=env(ISTIO_VERSION)' -i ./clusters/eso/istio-version.yaml
 
           if [[ $(git diff --stat) != '' ]]; then
             echo ::set-output name=version::${ISTIO_VERSION}
